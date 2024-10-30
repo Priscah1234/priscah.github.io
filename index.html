@@ -46,6 +46,18 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
+        .video-container {
+            max-width: 800px;
+            margin: 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        video {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
         .button {
             display: inline-block;
             margin: 10px 0;
@@ -75,13 +87,20 @@
     <h1>Priscah Mutheu</h1>
     <h2>Student at Machakos University</h2>
 </header>
-<br><br><br><br><br><br><br>
+
 <div class="content">
     <h2>Welcome to My Blog!</h2>
     <p>Here you'll find my thoughts on various topics, including gender equality and the art of equality. Feel free to download my works below!</p>
     
     <a href="https://github.com/Priscah1234/priscah.github.io/raw/main/Reframing%20Gender%20.pdf" class="button" download>Download Reframing Gender</a>
     <a href="https://github.com/Priscah1234/priscah.github.io/raw/main/Art%20of%20equality%20.pdf" class="button" download>Download Art of Equality</a>
+</div>
+
+<div class="video-container">
+    <video controls>
+        <source src="https://github.com/Priscah1234/priscah.github.io/raw/main/myvid.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 </div>
 
 <footer>
