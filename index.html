@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,6 +13,7 @@
             background: linear-gradient(135deg, #f0f4f8, #c9d6ff);
             color: #333;
             overflow-x: hidden;
+            transition: filter 0.3s; /* Smooth transition for blur effect */
         }
         header {
             background-color: #4a69a5;
@@ -48,25 +49,25 @@
             to { opacity: 1; }
         }
         .video-container {
-    position: fixed;
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Adjust for centering */
-    width: 80%; /* Width of the video container */
-    max-width: 900px; /* Optional: Set a max width */
-    background: rgba(0, 0, 0, 0.8);
-    display: none; /* Initially hidden */
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* Make sure it's on top of everything */
-    border-radius: 10px; /* Rounded corners */
-}
+            position: fixed;
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust for centering */
+            width: 80%; /* Width of the video container */
+            max-width: 900px; /* Optional: Set a max width */
+            background: rgba(0, 0, 0, 0.8);
+            display: none; /* Initially hidden */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Make sure it's on top of everything */
+            border-radius: 10px; /* Rounded corners */
+        }
 
-video {
-    width: 100%; /* Adjust to fit the video container */
-    height: 450px; /* Set a fixed height for the video */
-    border-radius: 10px; /* Optional: Rounded corners */
-}
+        video {
+            width: 100%; /* Adjust to fit the video container */
+            height: 450px; /* Set a fixed height for the video */
+            border-radius: 10px; /* Optional: Rounded corners */
+        }
 
         .button {
             display: inline-block;
@@ -121,27 +122,22 @@ video {
     </a>
 </header>
 
-<div class="content">
+<div class="content" id="mainContent">
     <h2>Welcome to My Blog!</h2>
     <p>Here you'll find my thoughts on various topics, including gender equality and the art of equality. Feel free to download my works below!</p>
     
     <a href="https://github.com/Priscah1234/priscah.github.io/raw/main/Reframing%20Gender%20.pdf" class="button" download>Download Reframing Gender</a>
-  
     <a href="https://github.com/Priscah1234/priscah.github.io/raw/main/Art%20of%20equality%20.pdf" class="button" download>Download Art of Equality</a>
-      ================== <button class="button" id="playButton" onclick="showVideo()">Play My Video</button>
-
-
+    <button class="button" id="playButton" onclick="showVideo()">Play My Video</button>
 </div>
 
-<div class="video-container" id="videoContainer">
-    <button class="close-button" onclick="closeVideo()">X</button>
-    <video id="myVideo" controls onended="closeVideo()">
+<div class="video-container" id="videoContainer" onclick="reloadPage()">
+    <button class="close-button" onclick="reloadPage(event)">X</button>
+    <video id="myVideo" controls onended="reloadPage()">
         <source src="https://github.com/Priscah1234/priscah.github.io/raw/main/myvid.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 </div>
-
-
 
 <footer>
     &copy; 2024 Priscah Mutheu. All rights reserved.
@@ -150,15 +146,16 @@ video {
 <script>
     function showVideo() {
         document.getElementById('videoContainer').style.display = 'flex'; // Show the video container
+        document.getElementById('mainContent').style.filter = 'blur(5px)'; // Blur the main content
         document.getElementById('playButton').style.display = 'none'; // Hide the play button
         document.getElementById('myVideo').play(); // Play the video
     }
     
-    function closeVideo() {
-        document.getElementById('videoContainer').style.display = 'none'; // Hide the video container
-        document.getElementById('myVideo').pause(); // Pause the video
-        document.getElementById('myVideo').currentTime = 0; // Reset the video to the start
-        document.getElementById('playButton').style.display = 'inline-block'; // Show the play button again
+    function reloadPage(event) {
+        if (event) {
+            event.stopPropagation(); // Stop the event from propagating if the close button is clicked
+        }
+        location.reload(); // Reload the page
     }
 </script>
 
