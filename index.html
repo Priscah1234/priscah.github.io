@@ -12,6 +12,7 @@
             background: linear-gradient(135deg, #f0f4f8, #c9d6ff);
             color: #333;
             overflow-x: hidden;
+            position: relative;
         }
         header {
             background-color: #4a69a5;
@@ -47,12 +48,17 @@
             to { opacity: 1; }
         }
         .video-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             max-width: 800px;
-            margin: 20px auto;
+            width: 90%;
+            background: white;
             border-radius: 10px;
-            overflow: hidden;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             display: none; /* Initially hidden */
+            z-index: 1000;
         }
         video {
             width: 100%;
@@ -69,19 +75,36 @@
             border-radius: 5px;
             transition: background-color 0.3s;
             cursor: pointer;
-            align-items: center;
-            position: center;
-            position: centered;
-            
+            position: relative;
         }
         .button:hover {
             background-color: #3b4a7a;
+        }
+        .close-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+            margin: 10px;
         }
         footer {
             text-align: center;
             margin: 20px 0;
             font-size: 0.8em;
             color: #666;
+        }
+        .whatsapp-icon {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/51/WhatsApp_icon_%282019%29.svg');
+            background-size: cover;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -101,6 +124,7 @@
 </div>
 
 <div class="video-container" id="videoContainer">
+    <button class="close-button" onclick="closeVideo()">X</button>
     <h2 style="text-align: center;">My Videos</h2>
     <video id="myVideo" controls>
         <source src="https://github.com/Priscah1234/priscah.github.io/raw/main/myvid.mp4" type="video/mp4">
@@ -110,6 +134,8 @@
 
 <button class="button" id="playButton" onclick="showVideo()">Play My Video</button>
 
+<div class="whatsapp-icon" onclick="openWhatsApp()"></div>
+
 <footer>
     &copy; 2024 Priscah Mutheu. All rights reserved.
 </footer>
@@ -118,7 +144,23 @@
     function showVideo() {
         document.getElementById('videoContainer').style.display = 'block'; // Show the video container
         document.getElementById('playButton').style.display = 'none'; // Hide the play button
-        document.getElementById('myVideo').play(); // Optional: Automatically play the video
+        document.getElementById('myVideo').play(); // Play the video
+    }
+
+    function closeVideo() {
+        document.getElementById('videoContainer').style.display = 'none'; // Hide the video container
+        document.getElementById('myVideo').pause(); // Pause the video
+        document.getElementById('myVideo').currentTime = 0; // Reset the video to the start
+        document.getElementById('playButton').style.display = 'inline-block'; // Show the play button again
+    }
+
+    document.getElementById('myVideo').addEventListener('ended', closeVideo); // Close video when it ends
+
+    function openWhatsApp() {
+        const phoneNumber = "254115783375";
+        const message = "Hello, how are you?";
+        const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
     }
 </script>
 
