@@ -52,6 +52,7 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: none; /* Initially hidden */
         }
         video {
             width: 100%;
@@ -60,18 +61,17 @@
         }
         .button {
             display: inline-block;
-            margin: 10px 0;
+            margin: 20px 0;
             padding: 10px 20px;
             background-color: #4a69a5;
             color: white;
             text-decoration: none;
             border-radius: 5px;
             transition: background-color 0.3s;
-            transform: perspective(1000px);
+            cursor: pointer;
         }
         .button:hover {
             background-color: #3b4a7a;
-            transform: rotateY(10deg);
         }
         footer {
             text-align: center;
@@ -95,18 +95,28 @@
     <a href="https://github.com/Priscah1234/priscah.github.io/raw/main/Reframing%20Gender%20.pdf" class="button" download>Download Reframing Gender</a>
     <a href="https://github.com/Priscah1234/priscah.github.io/raw/main/Art%20of%20equality%20.pdf" class="button" download>Download Art of Equality</a>
 </div>
-<br><br>
-    <h3>My acknowledgement videos</h3>
-<div class="video-container">
-    <video controls>
+
+<div class="video-container" id="videoContainer">
+    <h2 style="text-align: center;">My Videos</h2>
+    <video id="myVideo" controls>
         <source src="https://github.com/Priscah1234/priscah.github.io/raw/main/myvid.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 </div>
 
+<button class="button" id="playButton" onclick="showVideo()">Play My Video</button>
+
 <footer>
     &copy; 2024 Priscah Mutheu. All rights reserved.
 </footer>
+
+<script>
+    function showVideo() {
+        document.getElementById('videoContainer').style.display = 'block'; // Show the video container
+        document.getElementById('playButton').style.display = 'none'; // Hide the play button
+        document.getElementById('myVideo').play(); // Optional: Automatically play the video
+    }
+</script>
 
 </body>
 </html>
